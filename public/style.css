@@ -1,5 +1,6 @@
 body {
   text-align: center;
+   font-family: sans-serif;
 }
 
 .message-list {
@@ -11,6 +12,7 @@ body {
 h1 {
   color: #FFB03B;
   font-size: 150px;
+  text-align: center;
 }
 
 .post {
@@ -47,4 +49,26 @@ button {
    width: 300px;
    margin-left: auto;
    margin-right: auto;
+}
+.topnav {
+   background-color: pink;
+   overflow: hidden;
+   color: white;
+   font-family: sans-serif;
+}
+.topnav a:hover {
+   background-color: #ddd;
+   color: black;
+}
+.topnav a {
+   float: left;
+   color: #f2f2f2;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+   font-size: 25px;
+ }
+ .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
 }
