@@ -6,10 +6,12 @@ body {
 .message-list {
   background-color: #FFF0A5;
   padding: 20px;
+  display: block;
 }
 
 h1 {
-  color: grey;
+  color: #FFB03B;
+  font-size: 150px;
   text-align: center;
 }
 
@@ -19,6 +21,34 @@ h1 {
   border: 2px solid #FFB03B;
   border-radius: 5px;
   color: #468966;
+  display: block;
+}
+
+input {
+    border: 1px solid #3685B5;
+    background-color: #add1d8;
+    margin: 10px;
+    padding: 10px;
+    color: #45494C;
+    display: block;
+    height: 150px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+   color: black;
+   background-color: #6096BA;
+   border: 1px solid #274C77;
+   display: block;
+   margin: 10px;
+   padding: 10px;
+   font-size: 60px;
+   height: 80px;
+   width: 300px;
+   margin-left: auto;
+   margin-right: auto;
 }
 .topnav {
    background-color: pink;
