@@ -1,6 +1,6 @@
 body {
   text-align: center;
-   font-family: sans-serif;
+   font-family: 'Comic Sans MS';
 }
 
 .message-list {
@@ -20,9 +20,13 @@ h1 {
   padding: 10px;
   border: 2px solid #FFB03B;
   border-radius: 5px;
-  color: #468966;
+  color: #add1d8;
   display: block;
 }
+
+.time {
+  color: pink;
+  display: block;}
 
 input {
     border: 1px solid #3685B5;
@@ -39,7 +43,8 @@ input {
 
 button {
    color: black;
-   background-color: #6096BA;
+   font-family: 'Comic Sans MS'
+   background-color: #6096BB;
    border: 1px solid #274C77;
    display: block;
    margin: 10px;
