@@ -12,7 +12,8 @@
    </div>
       <form method="post" action="/posts">
           <input class="messageInput" type="text" name="message" value="message goes here">
-          <button class="postButton">Post it!</button>
+          <input class="photoInput" type="text" name="photo" value="Image URL goes here">
+          <button class="postButton">Post image!</button>
           <div class="note"></div>
       </form>
       <script>
@@ -20,6 +21,7 @@
           e.preventDefault();
           let data = {};
             data.message = document.querySelector(".messageInput").value;
+            data.photo = document.querySelector(".photoInput").value;
             fetch("/posts", {
               method:"POST",
               body: JSON.stringify(data),
