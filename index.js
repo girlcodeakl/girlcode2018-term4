@@ -26,7 +26,7 @@ function saveNewPost(request, response) {
   console.log(request.body.message);
   console.log(request.body.photo);
   console.log(request.body.author);
-  
+
 let post= {};
 post.message = request.body.message;
 post.photo = request.body.photo;
@@ -37,5 +37,5 @@ posts.push(post);
 app.post('/posts', saveNewPost);
 
 //listen for connections on port 3000
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 console.log("Hi! I am listening at http://localhost:3000");
