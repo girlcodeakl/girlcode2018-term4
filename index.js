@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 //make an empty list
 let posts = [];
 
+
 //let a client GET the list
 function sendPostsList(request, response) {
   response.send(posts);
@@ -23,12 +24,14 @@ app.get('/posts', sendPostsList);
 //let a client POST something new
 function saveNewPost(request, response) {
   console.log(request.body.message); //write it on the command prompt so we can see
-let post= {};
+let post ={};
 post.message = request.body.message;
+post.time = new Date();
 posts.push(post);
   response.send("thanks for your message. Press back to add another");
 }
 app.post('/posts', saveNewPost);
+
 
 //listen for connections on port 3000
 app.listen(3000);
