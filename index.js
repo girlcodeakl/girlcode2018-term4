@@ -23,8 +23,10 @@ app.get('/posts', sendPostsList);
 //let a client POST something new
 function saveNewPost(request, response) {
   console.log(request.body.message); //write it on the command prompt so we can see
+  console.log(request.body.author);
 let post= {};
 post.message = request.body.message;
+post.author = request.body.author;
 posts.push(post);
   response.send("thanks for your message. Press back to add another");
 }
