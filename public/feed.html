@@ -25,13 +25,11 @@
 function displayMessage(post) {
   let postHTML =
   '<div class="post">'
-<<<<<<< HEAD
   + '<div class="message">' + post.message + '</div>' + ' '
-  + '  <div class="time">' + new timeago().format(post.time) + ' </div>';
-=======
+  + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
   + '<div class="author">' + post.author + '</div>'
-  + '<div class="message">' + post.message + '</div>'
->>>>>>> 88c20b70450dc560fe99bf34e62f81c8985e6e80
+
+
   + '</div>';
 
   let messageList = document.querySelector(".message-list");
