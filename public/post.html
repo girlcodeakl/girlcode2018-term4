@@ -12,14 +12,17 @@
    </div>
       <form method="post" action="/posts">
           <input class="messageInput" type="text" name="message" value="message goes here">
+          <input class="authorInput" type="text" name="name" value="name">
           <button class="postButton">Post it!</button>
           <div class="note"></div>
+
       </form>
       <script>
         function sendMessageToServer(e) {
           e.preventDefault();
           let data = {};
             data.message = document.querySelector(".messageInput").value;
+            data.author = document.querySelector(".authorInput").value;
             fetch("/posts", {
               method:"POST",
               body: JSON.stringify(data),
