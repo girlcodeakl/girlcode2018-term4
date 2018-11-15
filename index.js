@@ -23,12 +23,16 @@ app.get('/posts', sendPostsList);
 
 //let a client POST something new
 function saveNewPost(request, response) {
-  console.log(request.body.message); //write it on the command prompt so we can see
 
-let post ={};
-post.message = request.body.message;
-post.time = new Date();
+  //write it on the command prompt so we can see
+  console.log(request.body.message);
+  console.log(request.body.photo);
   console.log(request.body.author);
+  
+let post= {};
+post.message = request.body.message;
+post.photo = request.body.photo;
+post.time = new Date();
 post.author = request.body.author;
 
 posts.push(post);
