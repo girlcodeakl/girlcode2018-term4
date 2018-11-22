@@ -34,7 +34,9 @@ post.message = request.body.message;
 post.photo = request.body.photo;
 post.time = new Date();
 post.author = request.body.author;
-
+if (post.photo === "") {
+   post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
+ }
 posts.push(post);
   response.send("thanks for your message. Press back to add another");
 }
