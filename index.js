@@ -19,6 +19,14 @@ function sendPostsList(request, response) {
   response.send(posts);
 }
 app.get('/posts', sendPostsList);
+app.get('/post', function (request, response) {
+   let searchId = request.query.id;
+   console.log("Searching for post " + searchId);
+   let post = posts.find(x => x.id == searchId);
+   response.send(post);
+
+
+});
 
 //let a client POST something new
 function saveNewPost(request, response) {
@@ -26,11 +34,12 @@ function saveNewPost(request, response) {
   console.log(request.body.message);
   console.log(request.body.photo);
   console.log(request.body.author);
-  
+
 let post= {};
 post.message = request.body.message;
 post.photo = request.body.photo;
 post.author = request.body.author;
+post.id = Math.round(Math.random() * 10000);
 posts.push(post);
   response.send("thanks for your message. Press back to add another");
 }
