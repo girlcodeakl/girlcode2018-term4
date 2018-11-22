@@ -28,12 +28,22 @@ function saveNewPost(request, response) {
   console.log(request.body.message);
   console.log(request.body.photo);
   console.log(request.body.author);
+  console.log(request.body.answer1);
+  console.log(request.body.answer2);
+  console.log(request.body.answer3);
+  console.log(request.body.answer4);
+
 
 let post= {};
 post.message = request.body.message;
 post.photo = request.body.photo;
 post.time = new Date();
 post.author = request.body.author;
+post.answers = []; //empty list
+post.answers.push(request.body.answer1);
+post.answers.push(request.body.answer2);
+post.answers.push(request.body.answer3);
+post.answers.push(request.body.answer4);
 if (post.photo === "") {
    post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
  }
