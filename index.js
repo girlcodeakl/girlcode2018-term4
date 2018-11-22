@@ -22,6 +22,12 @@ function sendPostsList(request, response) {
   response.send(posts);
 }
 app.get('/posts', sendPostsList);
+app.get('/post', function (request, response) {
+   let searchId = request.query.id;
+   console.log("Searching for post " + searchId);
+   let post = posts.find(x => x.id == searchId);
+   response.send(post);
+});
 
 //let a client POST something new
 function saveNewPost(request, response) {
@@ -35,12 +41,12 @@ function saveNewPost(request, response) {
   console.log(request.body.answer3);
   console.log(request.body.answer4);
 
-
 let post= {};
 post.message = request.body.message;
 post.photo = request.body.photo;
 post.time = new Date();
 post.author = request.body.author;
+post.id = Math.round(Math.random() * 10000);
 post.answers = []; //empty list
 post.answers.push(request.body.answer1);
 post.answers.push(request.body.answer2);
@@ -49,6 +55,7 @@ post.answers.push(request.body.answer4);
 if (post.photo === "") {
    post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
  }
+
 posts.push(post);
   response.send("thanks for your message. Press back to add another");
 databasePosts.insert(post);
