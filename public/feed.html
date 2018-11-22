@@ -25,9 +25,9 @@
 function displayMessage(post) {
   let postHTML =
   '<div class="post">'
-  
+
   + '<div class="message">' + post.message + '</div>' + ' '
-  + '  <img src='+ post.photo + '>' 
+  + '  <img src='+ post.photo + '>'
   + '<div class="author">' + post.author + '</div>'
   + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
 
@@ -39,6 +39,7 @@ function displayMessage(post) {
 }
 
 function createFeed(posts) {
+  posts.reverse();
   posts.forEach(displayMessage);
 }
 
