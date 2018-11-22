@@ -35,7 +35,7 @@ function displayMessage(post) {
   + '  <img src='+ post.photo + '>'
   + '<div class="author">' + post.author + '</div>'
   + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
-
+  + '<div class="postId">' + post.Id + '</div>'
 
   + '</div>';
 
@@ -44,6 +44,7 @@ function displayMessage(post) {
 }
 
 function createFeed(posts) {
+  posts.reverse();
   posts.forEach(displayMessage);
 }
 
