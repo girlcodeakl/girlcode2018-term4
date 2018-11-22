@@ -23,11 +23,16 @@
 //Hello! This is the start of the JavaScript.
 
 function displayMessage(post) {
+  if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
   let postHTML =
   '<div class="post">'
-  
+
   + '<div class="message">' + post.message + '</div>' + ' '
-  + '  <img src='+ post.photo + '>' 
+  + '<div class="answerButton">' + post.answers[0] + '</div>'
+  + '<div class="answerButton">' + post.answers[1] + '</div>'
+  + '<div class="answerButton">' + post.answers[2] + '</div>'
+  + '<div class="answerButton">' + post.answers[3] + '</div>'
+  + '  <img src='+ post.photo + '>'
   + '<div class="author">' + post.author + '</div>'
   + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
 
@@ -41,6 +46,17 @@ function displayMessage(post) {
 function createFeed(posts) {
   posts.forEach(displayMessage);
 }
+
+function messageListClick(e) {
+  if (e.target.classList.contains("answerButton")) {
+    console.log("button clicked!")
+  } else {
+    console.log("something else was clicked")
+  }
+}
+
+let messageList = document.querySelector(".message-list");
+messageList.addEventListener("click", messageListClick);
 
 fetch("/posts")
   .then(response => response.json())
