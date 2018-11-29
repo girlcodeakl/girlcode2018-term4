@@ -2,6 +2,8 @@
 let express = require('express')
 let app = express();
 let bodyParser = require('body-parser')
+var sanitizer = require('sanitizer');
+var isurl = require('is-url');
 
 //If a client asks for a file,
 //look in the public folder. If it's there, give it to them.
@@ -22,8 +24,8 @@ function sendPostsList(request, response) {
 app.get('/posts', sendPostsList);
 
 //let a client POST something new
-function saveNewPost(request, response) {
 
+function saveNewPost(request, response) {
   //write it on the command prompt so we can see
   console.log(request.body.message);
   console.log(request.body.photo);
@@ -34,6 +36,12 @@ post.message = request.body.message;
 post.photo = request.body.photo;
 post.time = new Date();
 post.author = request.body.author;
+post.message = sanitizer.sanitize(post.message);
+post.author = sanitizer.sanitize(post.author);
+post.message = sanitizer.escape(post.message);
+post.author = sanitizer.escape(post.author);
+post.photo = isurl(post.photo);
+
 if (post.photo === "") {
    post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
  }
