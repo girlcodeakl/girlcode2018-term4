@@ -8,6 +8,9 @@ body {
   padding: 20px;
   display: block;
 }
+.postId {
+    display: none;
+}
 
 h1 {
   color: #FFB03B;
@@ -55,6 +58,27 @@ button {
    margin-left: auto;
    margin-right: auto;
 }
+
+.answerButton {
+  display: block;
+    width: 50%;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 3px 10px;
+    background-color: #FFB03B;
+    background-image: linear-gradient(-180deg,#FFB03B,white 90%);
+    color: #add1d8;
+    background-position: -1px -1px;
+    background-repeat: repeat-x;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27,31,35,.2);
+    border-radius: .25em;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 .topnav {
    background-color: pink;
    overflow: hidden;
