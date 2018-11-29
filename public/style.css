@@ -1,6 +1,6 @@
 body {
   text-align: center;
-   font-family: 'Comic Sans MS';
+  font-family: 'Comic Sans MS';
 }
 
 .message-list {
@@ -8,8 +8,9 @@ body {
   padding: 20px;
   display: block;
 }
+
 .postId {
-    display: none;
+  display: none;
 }
 
 h1 {
@@ -29,75 +30,79 @@ h1 {
 
 .time {
   color: pink;
-  display: block;}
+  display: block;
+}
 
 input {
-    border: 1px solid #3685B5;
-    background-color: #add1d8;
-    margin: 10px;
-    padding: 10px;
-    color: #45494C;
-    display: block;
-    height: 150px;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+  border: 1px solid #3685B5;
+  background-color: #add1d8;
+  margin: 10px;
+  padding: 10px;
+  color: #45494C;
+  display: block;
+  height: 150px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button {
-   color: black;
-   font-family: 'Comic Sans MS'
-   background-color: #6096BB;
-   border: 1px solid #274C77;
-   display: block;
-   margin: 10px;
-   padding: 10px;
-   font-size: 60px;
-   height: 80px;
-   width: 300px;
-   margin-left: auto;
-   margin-right: auto;
+  color: black;
+  font-family: 'Comic Sans MS'
+    background-color: #6096BB;
+  border: 1px solid #274C77;
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  font-size: 60px;
+  height: 80px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .answerButton {
   display: block;
-    width: 50%;
-    font-size: 12px;
-    line-height: 20px;
-    padding: 3px 10px;
-    background-color: #FFB03B;
-    background-image: linear-gradient(-180deg,#FFB03B,white 90%);
-    color: #add1d8;
-    background-position: -1px -1px;
-    background-repeat: repeat-x;
-    background-size: 110% 110%;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: .25em;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  width: 50%;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 3px 10px;
+  background-color: #FFB03B;
+  background-image: linear-gradient(-180deg, #FFB03B, white 90%);
+  color: #add1d8;
+  background-position: -1px -1px;
+  background-repeat: repeat-x;
+  background-size: 110% 110%;
+  border: 1px solid rgba(27, 31, 35, .2);
+  border-radius: .25em;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .topnav {
-   background-color: pink;
-   overflow: hidden;
-   color: white;
-   font-family: sans-serif;
+  background-color: pink;
+  overflow: hidden;
+  color: white;
+  font-family: sans-serif;
 }
+
 .topnav a:hover {
-   background-color: #ddd;
-   color: black;
+  background-color: #ddd;
+  color: black;
 }
+
 .topnav a {
-   float: left;
-   color: #f2f2f2;
-   text-align: center;
-   padding: 14px 16px;
-   text-decoration: none;
-   font-size: 25px;
- }
- .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
 }
