@@ -16,21 +16,28 @@
      <a href="/feed.html">Feed</a>
    </div>
   <h1 class="title">Message Feed</h1>
+    <input class="filter" type="text" placeholder="message goes here">
     <div class="message-list">
-
     </div>
     <script>
 //Hello! This is the start of the JavaScript.
 
+
+
 function displayMessage(post) {
+  if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
   let postHTML =
   '<div class="post">'
-  
+
   + '<div class="message">' + post.message + '</div>' + ' '
-  + '  <img src='+ post.photo + '>' 
+  + '<div class="answerButton">' + post.answers[0] + '</div>'
+  + '<div class="answerButton">' + post.answers[1] + '</div>'
+  + '<div class="answerButton">' + post.answers[2] + '</div>'
+  + '<div class="answerButton">' + post.answers[3] + '</div>'
+  + '  <img src='+ post.photo + '>'
   + '<div class="author">' + post.author + '</div>'
   + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
-
+  + '<div class="postId">' + post.id + '</div>'
 
   + '</div>';
 
@@ -39,12 +46,40 @@ function displayMessage(post) {
 }
 
 function createFeed(posts) {
+  posts.reverse();
   posts.forEach(displayMessage);
 }
+
+function filterFeed() {
+  let searchText = document.querySelector(".filter").value;
+  document.querySelectorAll(".post").forEach(function(element) {
+ //code in here will be run once for each post in the list
+if (element.innerHTML.toLowerCase().includes(searchText.toLowerCase())) {
+  console.log("yes");
+  element.classList.remove("hidden");
+} else {
+  console.log("no");
+  element.classList.add("hidden");
+}
+})
+}
+
+function messageListClick(e) {
+  if (e.target.classList.contains("answerButton")) {
+    console.log("button clicked!")
+  } else {
+    console.log("something else was clicked")
+  }
+}
+
+let messageList = document.querySelector(".message-list");
+messageList.addEventListener("click", messageListClick);
 
 fetch("/posts")
   .then(response => response.json())
   .then(createFeed);
+
+document.querySelector(".filter").addEventListener("keyup", filterFeed);
 //This is the end of the JavaScript.
     </script>
   </body>
