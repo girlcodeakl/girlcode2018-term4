@@ -89,27 +89,27 @@
     let messageList = document.querySelector(".message-list");
     messageList.addEventListener("click", messageListClick);
 
-function filterFeed() {
-  let searchText = document.querySelector(".filter").value;
-  document.querySelectorAll(".post").forEach(function(element) {
- //code in here will be run once for each post in the list
-if (element.innerHTML.toLowerCase().includes(searchText.toLowerCase())) {
-  console.log("yes");
-  element.classList.remove("hidden");
-} else {
-  console.log("no");
-  element.classList.add("hidden");
-}
-})
-}
+    function filterFeed() {
+      let searchText = document.querySelector(".filter").value;
+      document.querySelectorAll(".post").forEach(function(element) {
+        //code in here will be run once for each post in the list
+        if (element.innerHTML.toLowerCase().includes(searchText.toLowerCase())) {
+          console.log("yes");
+          element.classList.remove("hidden");
+        } else {
+          console.log("no");
+          element.classList.add("hidden");
+        }
+      })
+    }
 
-fetch("/posts")
-  .then(response => response.json())
-  .then(createFeed);
+    fetch("/posts")
+      .then(response => response.json())
+      .then(createFeed);
 
-document.querySelector(".filter").addEventListener("keyup", filterFeed);
-//This is the end of the JavaScript.
-    </script>
-  </body>
+    document.querySelector(".filter").addEventListener("keyup", filterFeed);
+    //This is the end of the JavaScript.
+  </script>
+</body>
+
 </html>
-
