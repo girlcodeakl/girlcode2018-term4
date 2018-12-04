@@ -36,10 +36,10 @@
         +
         '  <img src=' + post.photo + '>' + '<div class="stats">' +
         '<div class="message">' + post.message + '</div>' + ' ' +
-        '<div class="answerButton">' + post.answers[0] + '</div>' +
-        '<div class="answerButton">' + post.answers[1] + '</div>' +
-        '<div class="answerButton">' + post.answers[2] + '</div>' +
-        '<div class="answerButton">' + post.answers[3] + '</div>' +
+        '<div class="answerButton" data-id= "0">' + post.answers[0] + '</div>' +
+        '<div class="answerButton" data-id= "1">' + post.answers[1] + '</div>' +
+        '<div class="answerButton" data-id= "2">' + post.answers[2] + '</div>' +
+        '<div class="answerButton" data-id= "3">' + post.answers[3] + '</div>' +
         '<div class="answerStat" style="width:' +
         (post.answerCount[0] / post.totalAnswers * 100) + '%">' + post.answers[0] + " " + (post.answerCount[0] / post.totalAnswers * 100) + "%" + '</div>' +
         '<div class="answerStat" style="width:' +
