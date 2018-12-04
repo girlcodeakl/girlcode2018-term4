@@ -12,7 +12,9 @@ let databasePosts = null;
 app.use(express.static(__dirname + '/public'));
 
 //this lets us read POST data
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 app.use(bodyParser.json())
 
 //make an empty list
@@ -24,11 +26,11 @@ function sendPostsList(request, response) {
   response.send(posts);
 }
 app.get('/posts', sendPostsList);
-app.get('/post', function (request, response) {
-   let searchId = request.query.id;
-   console.log("Searching for post " + searchId);
-   let post = posts.find(x => x.id == searchId);
-   response.send(post);
+app.get('/post', function(request, response) {
+  let searchId = request.query.id;
+  console.log("Searching for post " + searchId);
+  let post = posts.find(x => x.id == searchId);
+  response.send(post);
 });
 
 //let a client POST something new
@@ -43,31 +45,29 @@ function saveNewPost(request, response) {
   console.log(request.body.answer3);
   console.log(request.body.answer4);
 
-let post= {};
-post.message = request.body.message;
-post.photo = request.body.photo;
-post.time = new Date();
-post.author = request.body.author;
-post.message = sanitizer.sanitize(post.message);
-post.author = sanitizer.sanitize(post.author);
-post.message = sanitizer.escape(post.message);
-post.author = sanitizer.escape(post.author);
-post.photo = isurl(post.photo);
+  let post = {};
+  post.message = request.body.message;
+  post.photo = request.body.photo;
+  post.time = new Date();
+  post.author = request.body.author;
+  post.id = Math.round(Math.random() * 10000);
+  post.answers = []; //empty list
+  post.answers.push(sanitizer.sanitize(request.body.answer1));
+  post.answers.push(sanitizer.sanitize(request.body.answer2));
+  post.answers.push(sanitizer.sanitize(request.body.answer3));
+  post.answers.push(sanitizer.sanitize(request.body.answer4));
+  if (post.photo === "") {
+    post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
+  }
 
-post.id = Math.round(Math.random() * 10000);
-post.answers = []; //empty list
-post.answers.push(sanitizer.sanitize(request.body.answer1));
-post.answers.push(sanitizer.sanitize(request.body.answer2));
-post.answers.push(sanitizer.sanitize(request.body.answer3));
-post.answers.push(sanitizer.sanitize(request.body.answer4));
+  post.message = sanitizer.sanitize(post.message);
+  post.author = sanitizer.sanitize(post.author);
+  post.message = sanitizer.escape(post.message);
+  post.author = sanitizer.escape(post.author);
 
-if (post.photo === "") {
-   post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
- }
-
-posts.push(post);
+  posts.push(post);
   response.send("thanks for your message. Press back to add another");
-databasePosts.insert(post);
+  databasePosts.insert(post);
 }
 app.post('/posts', saveNewPost);
 
@@ -80,7 +80,9 @@ let MongoClient = require('mongodb').MongoClient;
 let databaseUrl = 'mongodb://girlcode2018:hats123@ds039331.mlab.com:39331/girlcode2018-term4';
 let databaseName = 'girlcode2018-term4';
 
-MongoClient.connect(databaseUrl, {useNewUrlParser: true}, function(err, client) {
+MongoClient.connect(databaseUrl, {
+  useNewUrlParser: true
+}, function(err, client) {
   if (err) throw err;
   console.log("yay we connected to the database");
   let database = client.db(databaseName);
@@ -91,3 +93,21 @@ MongoClient.connect(databaseUrl, {useNewUrlParser: true}, function(err, client) 
     posts = results
   });
 });
+
+function answerChosen(request, response) {
+  console.log("Post id: " + request.body.postId);
+  console.log("Answer number: " + request.body.answerNumber);
+  let post = posts.find(x => x.id == request.body.postId);
+  let answerNumber = parseInt(request.body.answerNumber);
+  if (post.answerCount === undefined) {
+    post.answerCount = [0, 0, 0, 0]; //starting values
+    post.totalAnswers = 0;
+  }
+  post.answerCount[answerNumber]++; //increase counter by one
+  post.totalAnswers++; //increase counter by one
+  databasePosts.update({
+    id: post.id
+  }, post);
+  response.send("ok");
+}
+app.post("/answerChosen", answerChosen);
