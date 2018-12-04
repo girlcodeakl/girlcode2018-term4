@@ -1,54 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/timeago.min.js"></script>
-    <title>Message Feed</title>
-    <link rel="stylesheet" href="style.css">
 
-    </div>
-  </head>
-  <body>
-    <div class="topnav">
-     <a href="/index.html">Home</a>
-     <a href="/post.html">Post</a>
-     <a href="/feed.html">Feed</a>
-   </div>
+<head>
+  <meta charset='utf-8'>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/timeago.min.js"></script>
+  <title>Message Feed</title>
+  <link rel="stylesheet" href="style.css">
+
+  </div>
+</head>
+
+<body>
+  <div class="topnav">
+    <a href="/index.html">Home</a>
+    <a href="/post.html">Post</a>
+    <a href="/feed.html">Feed</a>
+  </div>
   <h1 class="title">Message Feed</h1>
-    <input class="filter" type="text" placeholder="message goes here">
-    <div class="message-list">
-    </div>
-    <script>
-//Hello! This is the start of the JavaScript.
+  <input class="filter" type="text" placeholder="message goes here">
+  <div class="message-list">
+  </div>
+  <script>
+    //Hello! This is the start of the JavaScript.
 
+    function displayMessage(post) {
+      if (post.answerCount === undefined) {
+        post.answerCount = [5, 10, 10, 75];
+        post.totalAnswers = 100;
+      }
+      if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
+      let postHTML =
+        '<div class="post">'
 
+        +
+        '  <img src=' + post.photo + '>' + '<div class="stats">' +
+        '<div class="message">' + post.message + '</div>' + ' ' +
+        '<div class="answerButton">' + post.answers[0] + '</div>' +
+        '<div class="answerButton">' + post.answers[1] + '</div>' +
+        '<div class="answerButton">' + post.answers[2] + '</div>' +
+        '<div class="answerButton">' + post.answers[3] + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[0] / post.totalAnswers * 100) + '%">' + post.answers[0] + " " + (post.answerCount[0] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[1] / post.totalAnswers * 100) + '%">' + post.answers[1] + " " + (post.answerCount[1] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[2] / post.totalAnswers * 100) + '%">' + post.answers[2] + " " + (post.answerCount[2] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + " " + (post.answerCount[3] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="author">' + post.author + '</div>' +
+        '  <div class="time">' + new timeago().format(post.time) + ' </div>' +
+        '<div class="postId">' + post.id + '</div>';
 
-function displayMessage(post) {
-  if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
-  let postHTML =
-  '<div class="post">'
+      let messageList = document.querySelector(".message-list");
+      messageList.innerHTML += postHTML;
+    }
 
-  + '<div class="message">' + post.message + '</div>' + ' '
-  + '<div class="answerButton">' + post.answers[0] + '</div>'
-  + '<div class="answerButton">' + post.answers[1] + '</div>'
-  + '<div class="answerButton">' + post.answers[2] + '</div>'
-  + '<div class="answerButton">' + post.answers[3] + '</div>'
-  + '  <img src='+ post.photo + '>'
-  + '<div class="author">' + post.author + '</div>'
-  + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
-  + '<div class="postId">' + post.id + '</div>'
+    function createFeed(posts) {
+      posts.reverse();
+      posts.forEach(displayMessage);
+    }
 
-  + '</div>';
+    function messageListClick(e) {
+      if (e.target.classList.contains("answerButton")) {
+        console.log("button clicked!")
+      } else {
+        console.log("something else was clicked")
+      }
+    }
 
-  let messageList = document.querySelector(".message-list");
-  messageList.innerHTML += postHTML;
-}
-
-function createFeed(posts) {
-  posts.reverse();
-  posts.forEach(displayMessage);
-}
+    let messageList = document.querySelector(".message-list");
+    messageList.addEventListener("click", messageListClick);
 
 function filterFeed() {
   let searchText = document.querySelector(".filter").value;
@@ -71,9 +93,6 @@ function messageListClick(e) {
     console.log("something else was clicked")
   }
 }
-
-let messageList = document.querySelector(".message-list");
-messageList.addEventListener("click", messageListClick);
 
 fetch("/posts")
   .then(response => response.json())
