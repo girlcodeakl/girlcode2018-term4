@@ -50,7 +50,7 @@
         (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + " " + (post.answerCount[3] / post.totalAnswers * 100) + "%" + '</div>' +
         '<div class="author">' + post.author + '</div>' +
         '  <div class="time">' + new timeago().format(post.time) + ' </div>' +
-        '<div class="postId">' + post.id + '</div>' +
+        '<div class="postId">' + post.id + '</div>';
 
       let messageList = document.querySelector(".message-list");
       messageList.innerHTML += postHTML;
