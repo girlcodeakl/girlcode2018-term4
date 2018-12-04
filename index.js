@@ -2,6 +2,8 @@
 let express = require('express')
 let app = express();
 let bodyParser = require('body-parser')
+var sanitizer = require('sanitizer');
+var isurl = require('is-url');
 
 let databasePosts = null;
 
@@ -32,8 +34,8 @@ app.get('/post', function(request, response) {
 });
 
 //let a client POST something new
-function saveNewPost(request, response) {
 
+function saveNewPost(request, response) {
   //write it on the command prompt so we can see
   console.log(request.body.message);
   console.log(request.body.photo);
@@ -50,13 +52,18 @@ function saveNewPost(request, response) {
   post.author = request.body.author;
   post.id = Math.round(Math.random() * 10000);
   post.answers = []; //empty list
-  post.answers.push(request.body.answer1);
-  post.answers.push(request.body.answer2);
-  post.answers.push(request.body.answer3);
-  post.answers.push(request.body.answer4);
+  post.answers.push(sanitizer.sanitize(request.body.answer1));
+  post.answers.push(sanitizer.sanitize(request.body.answer2));
+  post.answers.push(sanitizer.sanitize(request.body.answer3));
+  post.answers.push(sanitizer.sanitize(request.body.answer4));
   if (post.photo === "") {
     post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
   }
+
+  post.message = sanitizer.sanitize(post.message);
+  post.author = sanitizer.sanitize(post.author);
+  post.message = sanitizer.escape(post.message);
+  post.author = sanitizer.escape(post.author);
 
   posts.push(post);
   response.send("thanks for your message. Press back to add another");
