@@ -26,7 +26,7 @@
 
     function displayMessage(post) {
       if (post.answerCount === undefined) {
-        post.answerCount = [5, 10, 10, 75];
+        post.answerCount = [0, 0, 0, 0];
         post.totalAnswers = 100;
       }
       if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
