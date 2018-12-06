@@ -135,3 +135,11 @@ button {
 .hidden {
   display: none
 }
+
+.unanswered .answerStat {
+  display: none;
+}
+
+.answered .answerButton {
+  display: none;
+}

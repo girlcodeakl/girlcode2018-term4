@@ -31,7 +31,7 @@
       }
       if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
       let postHTML =
-        '<div class="post">'
+        '<div class="post unanswered">'
 
         +
         '  <img src=' + post.photo + '>' + '<div class="stats">' +
@@ -64,6 +64,8 @@
     function messageListClick(e) {
       if (e.target.classList.contains("answerButton")) {
         console.log("button clicked!")
+        e.target.closest(".post").classList.remove("unanswered");
+        e.target.closest(".post").classList.add("answered");
 
         let answerNumber = e.target.dataset.id;
         let postIdElement = e.target.parentNode.querySelector(".postId");
