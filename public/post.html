@@ -39,7 +39,7 @@
       data.answer2 = document.querySelector(".answer2").value;
       data.answer3 = document.querySelector(".answer3").value;
       data.answer4 = document.querySelector(".answer4").value;
-      fetch("/answerChosen", {
+      fetch("/posts", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

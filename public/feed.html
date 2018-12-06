@@ -18,7 +18,7 @@
     <a href="/feed.html">Take Quiz</a>
   </div>
   <h1 class="title">Message Feed</h1>
-  <input class="filter" type="text" placeholder="message goes here">
+  <input class="filter" type="text" placeholder="Search">
   <div class="message-list">
   </div>
   <script>
@@ -26,12 +26,12 @@
 
     function displayMessage(post) {
       if (post.answerCount === undefined) {
-        post.answerCount = [5, 10, 10, 75];
+        post.answerCount = [0, 0, 0, 0];
         post.totalAnswers = 100;
       }
       if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
       let postHTML =
-        '<div class="post">'
+        '<div class="post unanswered">'
 
         +
         '  <img src=' + post.photo + '>' + '<div class="stats">' +
@@ -64,6 +64,8 @@
     function messageListClick(e) {
       if (e.target.classList.contains("answerButton")) {
         console.log("button clicked!")
+        e.target.closest(".post").classList.remove("unanswered");
+        e.target.closest(".post").classList.add("answered");
 
         let answerNumber = e.target.dataset.id;
         let postIdElement = e.target.parentNode.querySelector(".postId");
