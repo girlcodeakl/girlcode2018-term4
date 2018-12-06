@@ -33,7 +33,7 @@ h1 {
   display: block;
 }
 
-input {
+input.form {
   border: 1px solid #3685B5;
   background-color: #add1d8;
   margin: 10px;
@@ -44,6 +44,25 @@ input {
   width: 300px;
   margin-left: auto;
   margin-right: auto;
+}
+
+input.filter {
+  background-image: url('https://www.w3schools.com/css/searchicon.png');
+  /* Add a search icon to input */
+  background-position: 10px 12px;
+  /* Position the search icon */
+  background-repeat: no-repeat;
+  /* Do not repeat the icon image */
+  width: 50%;
+  /* Full-width */
+  font-size: 16px;
+  /* Increase font-size */
+  padding: 12px 20px 12px 40px;
+  /* Add some padding */
+  border: 1px solid #ddd;
+  /* Add a grey border */
+  margin-bottom: 12px;
+  /* Add some space below the input */
 }
 
 button {
