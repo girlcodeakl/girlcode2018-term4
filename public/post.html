@@ -30,18 +30,22 @@
 <body>
   <div class="topnav">
     <a href="/index.html">Home</a>
-    <a href="/post.html">Post</a>
-    <a href="/feed.html">Feed</a>
+    <a href="/post.html">Create Quiz</a>
+    <a href="/feed.html">Take Quiz</a>
   </div>
   <form method="post" action="/posts">
-    <input class="messageInput" type="text" name="message" placeholder="message goes here">
-    <input class="photoInput" type="text" name="photo" placeholder="Image URL goes here">
-    <input class="authorInput" type="text" name="name" placeholder="name">
-    <input class="answer1" type="text" name="answer1" placeholder="Answer 1">
-    <input class="answer2" type="text" name="answer2" placeholder="Answer 2">
-    <input class="answer3" type="text" name="answer3" placeholder="Answer 3">
-    <input class="answer4" type="text" name="answer4" placeholder="Answer 4">
-    <button class="postButton">Post it!</button>
+    <h2> Ask your biscuit related question here! </h2>
+    <input class="messageInput" type="text" name="message" placeholder="What is your favourite chocolate biscuit?">
+    <h2> Insert an image for your quiz! </h2>
+    <input class="photoInput" type="text" name="photo" placeholder="Paste your image URL here">
+    <h2> What is your name? </h2>
+    <input class="authorInput" type="text" name="name" placeholder="Jane Doe">
+    <h2> Enter your choices below: </h2>
+    <input class="answer1" type="text" name="answer1" placeholder="Choice 1">
+    <input class="answer2" type="text" name="answer2" placeholder="Choice 2">
+    <input class="answer3" type="text" name="answer3" placeholder="Choice 3">
+    <input class="answer4" type="text" name="answer4" placeholder="Choice 4">
+    <button class="postButton">Publish Quiz!</button>
     <div class="note"></div>
 
   </form>
