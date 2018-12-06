@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/timeago.min.js"></script>
-    <title>Message Feed</title>
+    <title> Take a biscuit quiz</title>
     <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
@@ -16,38 +16,99 @@
      <a href="/post.html">Post</a>
      <a href="/feed.html">Feed</a>
    </div>
-  <h1 class="title">Message Feed</h1>
-    <div class="message-list">
+  <h1 class="title">Take a biscuit quiz</h1>
+  <input class="filter" type="text" placeholder="message goes here">
+  <div class="message-list">
+  </div>
+  <script>
+    //Hello! This is the start of the JavaScript.
 
-    </div>
-    <script>
-//Hello! This is the start of the JavaScript.
+    function displayMessage(post) {
+      if (post.answerCount === undefined) {
+        post.answerCount = [5, 10, 10, 75];
+        post.totalAnswers = 100;
+      }
+      if (!post.answers) post.answers = ["one", "two", "three", "four"]; //For testing only
+      let postHTML =
+        '<div class="post">'
 
-function displayMessage(post) {
-  let postHTML =
-  '<div class="post">'
+        +
+        '  <img src=' + post.photo + '>' + '<div class="stats">' +
+        '<div class="message">' + post.message + '</div>' + ' ' +
+        '<div class="answerButton" data-id= "0">' + post.answers[0] + '</div>' +
+        '<div class="answerButton" data-id= "1">' + post.answers[1] + '</div>' +
+        '<div class="answerButton" data-id= "2">' + post.answers[2] + '</div>' +
+        '<div class="answerButton" data-id= "3">' + post.answers[3] + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[0] / post.totalAnswers * 100) + '%">' + post.answers[0] + " " + (post.answerCount[0] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[1] / post.totalAnswers * 100) + '%">' + post.answers[1] + " " + (post.answerCount[1] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[2] / post.totalAnswers * 100) + '%">' + post.answers[2] + " " + (post.answerCount[2] / post.totalAnswers * 100) + "%" + '</div>' +
+        '<div class="answerStat" style="width:' +
+        (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + " " + (post.answerCount[3] / post.totalAnswers * 100) + "%" + '</div>' +
+        '  <div class="time">' + new timeago().format(post.time) + ' </div>' +
+        '<div class="author">' + post.author + '</div>' +
+        '<div class="postId">' + post.id + '</div>';
 
-  + '<div class="message">' + post.message + '</div>' + ' '
-  + '  <img src='+ post.photo + '>'
-  + '<div class="author">' + post.author + '</div>'
-  + '  <div class="time">' + new timeago().format(post.time) + ' </div>'
+      let messageList = document.querySelector(".message-list");
+      messageList.innerHTML += postHTML;
+    }
 
+    function createFeed(posts) {
+      posts.reverse();
+      posts.forEach(displayMessage);
+    }
 
-  + '</div>';
+    function messageListClick(e) {
+      if (e.target.classList.contains("answerButton")) {
+        console.log("button clicked!")
 
-  let messageList = document.querySelector(".message-list");
-  messageList.innerHTML += postHTML;
-}
+        let answerNumber = e.target.dataset.id;
+        let postIdElement = e.target.parentNode.querySelector(".postId");
+        let postId = postIdElement.innerHTML;
+        e.preventDefault();
+        let data = {};
+        data.postId = postId;
+        data.answerNumber = answerNumber
+        fetch("/answerChosen", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log("You chose post " + postId + ", answer " + answerNumber);
+      } else {
+        console.log("something else was clicked")
 
-function createFeed(posts) {
-  posts.reverse();
-  posts.forEach(displayMessage);
-}
+      }
+    }
 
-fetch("/posts")
-  .then(response => response.json())
-  .then(createFeed);
-//This is the end of the JavaScript.
-    </script>
-  </body>
+    let messageList = document.querySelector(".message-list");
+    messageList.addEventListener("click", messageListClick);
+
+    function filterFeed() {
+      let searchText = document.querySelector(".filter").value;
+      document.querySelectorAll(".post").forEach(function(element) {
+        //code in here will be run once for each post in the list
+        if (element.innerHTML.toLowerCase().includes(searchText.toLowerCase())) {
+          console.log("yes");
+          element.classList.remove("hidden");
+        } else {
+          console.log("no");
+          element.classList.add("hidden");
+        }
+      })
+    }
+
+    fetch("/posts")
+      .then(response => response.json())
+      .then(createFeed);
+
+    document.querySelector(".filter").addEventListener("keyup", filterFeed);
+    //This is the end of the JavaScript.
+  </script>
+</body>
+
 </html>
