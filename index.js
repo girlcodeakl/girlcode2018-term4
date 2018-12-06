@@ -46,24 +46,25 @@ function saveNewPost(request, response) {
   console.log(request.body.questions[0].answer4);
 
   let post = {};
-  post.message = request.body.message;
+  post.questions = [];
+  post.questions.push({});
+  post.questions[0].message = request.body.questions[0].message;
   post.photo = request.body.photo;
   post.time = new Date();
   post.author = request.body.author;
-  post.message = sanitizer.sanitize(post.message);
+  post.questions[0].message = sanitizer.sanitize(post.questions[0].message);
   post.author = sanitizer.sanitize(post.author);
   post.message = sanitizer.escape(post.message);
   post.author = sanitizer.escape(post.author);
   post.photo = isurl(post.photo);
 
   post.id = Math.round(Math.random() * 10000);
-  post.questions = [];
-  post.questions.push({});
+
   post.questions[0].answers = []; //empty list
-  post.questions[0].answers.push(sanitizer.sanitize(request.body.answer1));
-  post.questions[0].answers.push(sanitizer.sanitize(request.body.answer2));
-  post.questions[0].answers.push(sanitizer.sanitize(request.body.answer3));
-  post.questions[0].answers.push(sanitizer.sanitize(request.body.answer4));
+  post.questions[0].answers.push(sanitizer.sanitize(request.body.questions[0].answer1));
+  post.questions[0].answers.push(sanitizer.sanitize(request.body.questions[0].answer2));
+  post.questions[0].answers.push(sanitizer.sanitize(request.body.questions[0].answer3));
+  post.questions[0].answers.push(sanitizer.sanitize(request.body.questions[0].answer4));
 
   if (post.photo === "") {
     post.photo = "https://93546-d-c.ooyala.com/content/images/1131/259836_636x357.jpg"
