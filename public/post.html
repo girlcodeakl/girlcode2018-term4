@@ -1,5 +1,26 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  </head>
+  <body>
+    <div class="topnav">
+     <a href="/index.html">Home</a>
+     <a href="/post.html">Post</a>
+     <a href="/feed.html">Feed</a>
+   </div>
+      <form method="post" action="/posts">
+          <input class="messageInput" type="text" name="message" placeholder="message goes here">
+          <input class="photoInput" type="text" name="photo" value="Image URL goes here">
+          <input class="authorInput" type="text" name="name" placeholder="name">
+          <input class="answer1" type="text" name="answer1" placeholder="Answer 1">
+          <input class="answer2" type="text" name="answer2" placeholder="Answer 2">
+          <input class="answer3" type="text" name="answer3" placeholder="Answer 3">
+          <input class="answer4" type="text" name="answer4" placeholder="Answer 4">
+          <button class="postButton">Post it!</button>
+          <div class="note"></div>
 
 <head>
   <meta charset='utf-8'>
